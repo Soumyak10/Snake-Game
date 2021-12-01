@@ -1,18 +1,64 @@
-import React, { useEffect, useState, useInterval } from "react";
-import Snake from "../snake/Snake";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { newHead } from "../../actions";
 
 import "./snakeBoard.css";
-const Board_size = 10;
 
 const SnakeBoard = () => {
+  // redux
+  const snake = useSelector((state) => state.snake);
+  const head = useSelector((state) => state.head);
+  const dispatch = useDispatch();
+
+  // board config
+  const Board_size = 10;
+  const foodCord = [[], []];
   const [board, setBoard] = useState(
     new Array(Board_size).fill(0).map((row) => new Array(Board_size).fill(0))
   );
 
-  const [snakeDots, setSnakeDots] = useState([
-    [0, 0],
-    [2, 0],
-  ]);
+  snake.forEach((cord) => {
+    board[cord[0]][cord[1]] = 1;
+  });
+
+  // genearting food
+  const getRandom = () => {
+    return Math.floor(Math.random() * 9);
+  };
+
+  const generateFood = () => {
+    foodCord[0] = getRandom();
+    foodCord[1] = getRandom();
+
+    board[foodCord[0]][foodCord[1]] = 2;
+  };
+
+  // generateFood();
+
+  // handling key down i.e moving the snake
+  const handleKeyDown = (e) => {
+    // let dots = [...snake];
+    // let len = dots.length;
+    // console.log("key", snake);
+
+    switch (e.key) {
+      case "ArrowRight":
+        dispatch(newHead([head[0], head[1] + 1]));
+        // console.log(snake);
+        break;
+      case "ArrowLeft":
+        dispatch(newHead([head[0], head[1] - 2]));
+        break;
+      case "ArrowUp":
+        dispatch(newHead([head[0] - 1, head[1]]));
+        break;
+      case "ArrowDown":
+        dispatch(newHead([head[0] + 1, head[1]]));
+        break;
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -20,44 +66,17 @@ const SnakeBoard = () => {
     });
   }, []);
 
-  const handleKeyDown = (e) => {
-    let dots = [...snakeDots];
-    let head = dots[dots.length - 1];
-
-    switch (e.key) {
-      case "ArrowRight":
-        // head = [head[0] + 2, head[1]];
-        dots.push([head[0] + 2, head[1]]);
-        dots.shift();
-        setSnakeDots(dots);
-        console.log(snakeDots);
-        console.log(dots);
-        console.log("right");
-        break;
-      case "ArrowLeft":
-        head = [head[0] - 2, head[1]];
-        console.log("left");
-        break;
-      case "ArrowDown":
-        head = [head[0], head[1] + 2];
-        console.log("down");
-        break;
-      case "ArrowUp":
-        head = [head[0], head[1] - 2];
-        console.log("up");
-        break;
-
-      default:
-        break;
-    }
-  };
-
   return (
     <div className="board">
       {board.map((row, row_index) => (
         <div key={row_index} className="row">
           {row.map((cell, cell_index) => (
-            <div key={cell_index} className="cell"></div>
+            <div
+              key={cell_index}
+              className={`cell ${
+                cell === 1 ? "snake" : cell === 2 ? "food" : ""
+              }`}
+            ></div>
           ))}
         </div>
       ))}
