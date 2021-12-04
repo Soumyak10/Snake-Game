@@ -5,12 +5,12 @@ const initialState = [
 
 const snakeReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case "NEW_HEAD":
-    //   // let newState = [...state];
-    //   // newState.shift();
-    //   // newState.push(action.payload);
-    //   // console.log(action.payload);
-    //   // return [...state, action.payload];
+    case "NEW_HEAD":
+      let newState = [...state];
+      newState.shift();
+      newState.push(action.payload);
+      console.log(action.payload);
+      return [...state, action.payload];
     //   let newState = JSON.parse(JSON.stringify(state));
     //   newState.push(action.payload);
     //   // console.log("pushed", newState);

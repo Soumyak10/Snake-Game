@@ -1,5 +1,12 @@
+:root {
+  --border: rgb(12, 12, 12);
+  --cell-color: rgba(214, 138, 23, 0.897);
+  --cell_odd_color: rgba(238, 144, 3, 0.959);
+}
+
 .board {
-  outline: 2px solid rgb(134, 154, 189);
+  outline: 8px solid var(--border);
+  margin-top: 3%;
 }
 
 .row {
@@ -9,16 +16,26 @@
 .cell {
   width: 50px;
   height: 50px;
-  outline: 1px solid rgb(134, 154, 189);
+  outline: 2px solid var(--border);
+  background-color: var(--cell-color);
+  display: inline-block;
+}
+
+.cell_odd {
+  width: 50px;
+  height: 50px;
+  outline: 2px solid var(--border);
+  background-color: var(--cell_odd_color);
   display: inline-block;
 }
 
 .snake {
-  background-color: #10db1a;
+  background-color: #06790c;
   /* border: 1px solid #10db1a; */
 }
 
 .food {
   background-color: rgb(219, 16, 16);
+  border-radius: 50%;
   /* border: 1px solid #db1010; */
 }

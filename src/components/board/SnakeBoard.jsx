@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { newHead } from "../../actions";
+import { FcIdea } from "react-icons/fc";
 
 import "./snakeBoard.css";
 
@@ -74,7 +75,13 @@ const SnakeBoard = () => {
             <div
               key={cell_index}
               className={`cell ${
-                cell === 1 ? "snake" : cell === 2 ? "food" : ""
+                cell === 1
+                  ? "snake"
+                  : cell === 2
+                  ? "food"
+                  : cell_index % 2 === row_index % 2
+                  ? "cell_odd"
+                  : ""
               }`}
             ></div>
           ))}

@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.music,
+.howToplay {
+  font-size: 30px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 0.3rem 0.6rem;
+}
+
+.music:hover,
+.howToplay:hover {
+  background-color: #eb6c45;
+  color: rgb(20, 6, 18);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.suffix {
+  font-size: 20px;
+  margin: 0px;
+  visibility: hidden;
+}
+
+.music:hover .suffix,
+.howToplay:hover .suffix {
+  visibility: visible;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#popup {
+  padding: 40px;
+  border-radius: 5px;
+  background: black;
+  height: 231px;
+  width: 312px;
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 31%;
+  top: 16%;
+}
+
+.show {
+  opacity: 100 !important;
+  visibility: visible !important;
+}
