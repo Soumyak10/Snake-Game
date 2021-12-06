@@ -6,7 +6,7 @@
 
 .board {
   outline: 8px solid var(--border);
-  margin-top: 3%;
+  margin-top: 13px;
 }
 
 .row {

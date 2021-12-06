@@ -5,15 +5,17 @@ import Music from "./Music";
 
 const Header = ({ score }) => {
   return (
-    <div className="header">
-      <div>
-        <Music />
+    <>
+      <div className="header">
+        <div>
+          <Music />
+        </div>
+        <div>
+          <HowToPlay />
+        </div>
       </div>
-      SCORE:{score}
-      <div>
-        <HowToPlay />
-      </div>
-    </div>
+      <div className="score">SCORE:{score}</div>
+    </>
   );
 };
 
