@@ -3,12 +3,13 @@ import { useState } from "react";
 import "./header.css";
 import Music from "./Music";
 
-const Header = () => {
+const Header = ({ score }) => {
   return (
     <div className="header">
       <div>
         <Music />
       </div>
+      SCORE:{score}
       <div>
         <HowToPlay />
       </div>

@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.header_container {
+  position: relative;
+  width: 100%;
+}
+
 .music,
 .howToplay {
   font-size: 30px;
@@ -31,32 +36,69 @@
   visibility: visible;
 }
 
+.icon-hover:hover {
+  color: #dbbb2a;
+}
+/* POPUP css */
 .overlay {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
   opacity: 0;
   visibility: hidden;
 }
+.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+}
 
 #popup {
-  padding: 40px;
-  border-radius: 5px;
-  background: black;
-  height: 231px;
-  width: 312px;
+  padding: 10px;
+  border-radius: 15px;
+  background: #84a12d;
+  height: 79%;
+  width: 39%;
   text-align: center;
   color: white;
   position: absolute;
-  left: 31%;
-  top: 16%;
+  left: 30%;
+  top: 7%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#popup h2 {
+  margin: 24px;
+}
+
+#popup h4 {
+  margin: 30px;
+  font-size: 30px;
+}
+
+#popup h5 {
+  margin: 10px;
 }
 
 .show {
-  opacity: 100 !important;
+  opacity: 1 !important;
   visibility: visible !important;
+  backdrop-filter: blur(5px);
+}
+
+.close_btn {
+  float: right;
+  border-radius: 50%;
+  background: #84a12d;
+  border: 0px;
+  color: whitesmoke;
+  font-size: 24px;
+  cursor: pointer;
+  font-family: "Comforter Brush", cursive;
 }

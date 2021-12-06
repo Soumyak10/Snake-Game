@@ -1,67 +1,57 @@
 import { FaQuestion } from "react-icons/fa";
+import {
+  AiOutlineArrowDown,
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineArrowUp,
+} from "react-icons/ai";
 import { useState } from "react";
-import Popup from "reactjs-popup";
 import "./header.css";
 
 const HowToplay = () => {
   const [PopUp, setPopUp] = useState(false);
+
   return (
-    <div
-      style={{ cursor: "pointer" }}
-      className="howToplay"
-      onClick={() => {
-        setPopUp(true);
-        console.log("clicked");
-        <div className={`overlay ${Popup === true ? "show" : ""} `} id="popup">
-          <h4>This is going be a popup</h4>
-        </div>;
-      }}
-    >
-      <FaQuestion />
-      <p className="suffix">play</p>
+    <div className="howToplay">
+      <div
+        style={{ border: "0px", fontSize: "30px" }}
+        onClick={() => setPopUp(true)}
+      >
+        <FaQuestion className="icon-hover" />
+      </div>
+      <div className={`${PopUp ? "blur" : ""}`}></div>
+      <div className={`overlay ${PopUp === true ? "show" : ""} `} id="popup">
+        <button
+          className="close_btn"
+          onClick={() => {
+            setPopUp(false);
+          }}
+        >
+          X
+        </button>
+        <h3 style={{ textDecoration: "underline", color: "#efcb66" }}>
+          How To Play:{" "}
+        </h3>
+        <h5>
+          Use arrow keys to move snake in diffrent directions.if snake eats
+          apple it's size will increase or else if it's own body it will die
+        </h5>
+        <h4>
+          <AiOutlineArrowUp style={{ color: "#efcb66" }} /> - MoveUp
+        </h4>
+        <h4>
+          <AiOutlineArrowDown style={{ color: "#efcb66" }} /> - MoveDown
+        </h4>
+        <h4>
+          <AiOutlineArrowRight style={{ color: "#efcb66" }} /> - MoveRight
+        </h4>
+        <h4>
+          <AiOutlineArrowLeft style={{ color: "#efcb66" }} /> - MoveLeft
+        </h4>
+      </div>
+      <p className="suffix">Howtoplay</p>
     </div>
   );
 };
 
 export default HowToplay;
-
-// import React from "react";
-// import Popup from "reactjs-popup";
-
-// export default () => (
-//   <Popup
-//     trigger={<button className="button"> Open Modal </button>}
-//     modal
-//     nested
-//   >
-//     {(close) => (
-//       <div className="modal">
-//         <button className="close" onClick={close}>
-//           &times;
-//         </button>
-//         <div className="header"> Modal Title </div>
-//         <div className="content">
-//           {" "}
-//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a
-//           nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet
-//           quibusdam voluptates delectus doloremque, explicabo tempore dicta
-//           adipisci fugit amet dignissimos?
-//           <br />
-//           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
-//           sit commodi beatae optio voluptatum sed eius cumque, delectus saepe
-//           repudiandae explicabo nemo nam libero ad, doloribus, voluptas rem
-//           alias. Vitae?
-//         </div>
-//         <button
-//           className="button"
-//           onClick={() => {
-//             console.log("modal closed ");
-//             close();
-//           }}
-//         >
-//           close modal
-//         </button>
-//       </div>
-//     )}
-//   </Popup>
-// );

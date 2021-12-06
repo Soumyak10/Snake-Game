@@ -1,89 +1,125 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { newHead } from "../../actions";
-import { FcIdea } from "react-icons/fc";
+import React, { useState, useEffect, useRef } from "react";
 
 import "./snakeBoard.css";
 
-const SnakeBoard = () => {
-  // redux
-  const snake = useSelector((state) => state.snake);
-  const head = useSelector((state) => state.head);
-  const dispatch = useDispatch();
+const SnakeBoard = ({ score, setScore }) => {
+  const width = 10;
+  const height = 10;
+  let initialRows = [];
+  for (let i = 0; i < height; i++) {
+    initialRows.push([]);
+    for (let k = 0; k < width; k++) {
+      initialRows[i].push("blank");
+    }
+  }
 
-  // board config
-  const Board_size = 10;
-  const foodCord = [[], []];
-  const [board, setBoard] = useState(
-    new Array(Board_size).fill(0).map((row) => new Array(Board_size).fill(0))
-  );
-
-  snake.forEach((cord) => {
-    board[cord[0]][cord[1]] = 1;
-  });
-
-  // genearting food
-  const getRandom = () => {
-    return Math.floor(Math.random() * 9);
+  const randomPosition = () => {
+    const position = {
+      x: Math.floor(Math.random() * width),
+      y: Math.floor(Math.random() * height),
+    };
+    return position;
   };
 
-  const generateFood = () => {
-    foodCord[0] = getRandom();
-    foodCord[1] = getRandom();
+  const [board, setBoard] = useState(initialRows);
 
-    board[foodCord[0]][foodCord[1]] = 2;
-  };
+  const [snake, setSnake] = useState([
+    { x: 0, y: 0 },
+    { x: 1, y: 0 },
+  ]);
+  const [direction, setDirection] = useState("right");
+  const [food, setFood] = useState(randomPosition);
 
-  // generateFood();
-
-  // handling key down i.e moving the snake
-  const handleKeyDown = (e) => {
-    // let dots = [...snake];
-    // let len = dots.length;
-    // console.log("key", snake);
-
-    switch (e.key) {
-      case "ArrowRight":
-        dispatch(newHead([head[0], head[1] + 1]));
-        // console.log(snake);
+  const changeDirectionWithKeys = (e) => {
+    var { keyCode } = e;
+    switch (keyCode) {
+      case 37:
+        setDirection("left");
         break;
-      case "ArrowLeft":
-        dispatch(newHead([head[0], head[1] - 2]));
+      case 38:
+        setDirection("top");
         break;
-      case "ArrowUp":
-        dispatch(newHead([head[0] - 1, head[1]]));
+      case 39:
+        setDirection("right");
         break;
-      case "ArrowDown":
-        dispatch(newHead([head[0] + 1, head[1]]));
+      case 40:
+        setDirection("bottom");
         break;
       default:
         break;
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("keydown", (e) => {
-      handleKeyDown(e);
+  const displaySnake = () => {
+    const newRows = initialRows;
+    snake.forEach((cell) => {
+      newRows[cell.x][cell.y] = "snake";
     });
-  }, []);
+    newRows[food.x][food.y] = "food";
+    setBoard(newRows);
+  };
+
+  const moveSnake = () => {
+    const newSnake = [...snake];
+    switch (direction) {
+      case "right":
+        newSnake.unshift({ x: snake[0].x, y: (snake[0].y + 1) % width });
+        break;
+      case "left":
+        newSnake.unshift({
+          x: snake[0].x,
+          y: (snake[0].y - 1 + width) % width,
+        });
+        break;
+      case "top":
+        newSnake.unshift({
+          x: (snake[0].x - 1 + height) % height,
+          y: snake[0].y,
+        });
+        break;
+      case "bottom":
+        newSnake.unshift({ x: (snake[0].x + 1) % height, y: snake[0].y });
+    }
+    if (snake[0].x === food.x && snake[0].y === food.y) {
+      setFood(randomPosition);
+      setScore(score + 1);
+    } else {
+      newSnake.pop();
+    }
+    setSnake(newSnake);
+    displaySnake();
+  };
+
+  useInterval(moveSnake, 100);
+
+  document.addEventListener("keydown", changeDirectionWithKeys, false);
+
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
 
   return (
     <div className="board">
       {board.map((row, row_index) => (
         <div key={row_index} className="row">
           {row.map((cell, cell_index) => (
-            <div
-              key={cell_index}
-              className={`cell ${
-                cell === 1
-                  ? "snake"
-                  : cell === 2
-                  ? "food"
-                  : cell_index % 2 === row_index % 2
-                  ? "cell_odd"
-                  : ""
-              }`}
-            ></div>
+            <div key={cell_index} className={`cell ${cell}`}></div>
           ))}
         </div>
       ))}
