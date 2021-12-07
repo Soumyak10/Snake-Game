@@ -2,6 +2,7 @@ import HowToPlay from "./HowToPlay";
 import { useState } from "react";
 import "./header.css";
 import Music from "./Music";
+import { GiSnake } from "react-icons/gi";
 
 const Header = ({ score }) => {
   return (
@@ -10,6 +11,9 @@ const Header = ({ score }) => {
         <div>
           <Music />
         </div>
+        <h2 className="heading">
+          SNAKE-GAME <GiSnake />
+        </h2>
         <div>
           <HowToPlay />
         </div>

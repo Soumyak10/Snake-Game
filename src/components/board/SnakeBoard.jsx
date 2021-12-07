@@ -22,6 +22,7 @@ const SnakeBoard = ({ score, setScore }) => {
   };
 
   const [board, setBoard] = useState(initialRows);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const [snake, setSnake] = useState([
     { x: 0, y: 0 },
@@ -45,6 +46,8 @@ const SnakeBoard = ({ score, setScore }) => {
       case 40:
         setDirection("bottom");
         break;
+      case 32:
+        setIsPlaying(!isPlaying);
       default:
         break;
     }
@@ -90,6 +93,10 @@ const SnakeBoard = ({ score, setScore }) => {
     displaySnake();
   };
 
+  // if (isPlaying) {
+  //   useInterval(moveSnake, 100);
+  // }
+
   useInterval(moveSnake, 100);
 
   document.addEventListener("keydown", changeDirectionWithKeys, false);
@@ -115,7 +122,8 @@ const SnakeBoard = ({ score, setScore }) => {
   }
 
   return (
-    <div className="board">
+    <div className="board" onClick={() => setIsPlaying(!isPlaying)}>
+      <div className="blur_board"> PRESS SPACE TO PLAY</div>
       {board.map((row, row_index) => (
         <div key={row_index} className="row">
           {row.map((cell, cell_index) => (

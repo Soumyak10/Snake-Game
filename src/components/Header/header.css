@@ -5,7 +5,6 @@
 }
 
 .header_container {
-  /* position: relative; */
   display: contents;
   width: 100%;
 }
@@ -21,9 +20,7 @@
 
 .music:hover,
 .howToplay:hover {
-  /* background-color: #eb6c45; */
   color: rgb(20, 6, 18);
-  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); */
 }
 
 .suffix {
@@ -31,7 +28,6 @@
   margin: 0px;
   visibility: hidden;
   color: #1f9b61;
-  /* color: palegreen; */
   text-shadow: 2px 2px 8px palegreen;
   font-weight: bold;
 }
@@ -42,31 +38,19 @@
 }
 
 .icon-hover:hover {
-  /* color: #db742a; */
-  /* color: #805127; */
   color: purple;
 }
 
-.score {
-  height: 7%;
-  width: 15%;
-  border-radius: 9%;
-  box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
-  background: linear-gradient(
-    0deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(253, 187, 45, 1) 63%
-  );
+.heading {
+  text-shadow: 2px 2px 8px rgb(161, 16, 161);
   color: darkblue;
   margin-top: 0px;
   margin-bottom: 0px;
-  /* position: absolute;
-  top: 13%;
-  right: 33%; */
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
+  line-height: 92px;
 }
+
 /* POPUP css */
 .overlay {
   position: fixed;
@@ -99,6 +83,7 @@
   left: 30%;
   top: 7%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  z-index: 10;
 }
 
 #popup h2 {

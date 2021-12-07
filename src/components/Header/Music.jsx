@@ -22,7 +22,6 @@ const Music = () => {
       style={{ cursor: "pointer" }}
       onClick={() => setPlay(!play)}
     >
-      {/* <FiMusic className={`icon-hover ${play ? "line" : ""}`} /> */}
       {play ? (
         <MdMusicNote className="icon-hover" />
       ) : (
