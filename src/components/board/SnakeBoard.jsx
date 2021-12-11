@@ -83,6 +83,7 @@ const SnakeBoard = ({ score, setScore }) => {
         break;
       case "bottom":
         newSnake.unshift({ x: (snake[0].x + 1) % height, y: snake[0].y });
+        break;
       default:
         break;
     }
