@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FiMusic } from "react-icons/fi";
 import { MdMusicNote, MdMusicOff } from "react-icons/md";
 import "./header.css";
 

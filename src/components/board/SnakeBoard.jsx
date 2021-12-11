@@ -48,6 +48,7 @@ const SnakeBoard = ({ score, setScore }) => {
         break;
       case 32:
         setIsPlaying(!isPlaying);
+        break;
       default:
         break;
     }
@@ -82,6 +83,8 @@ const SnakeBoard = ({ score, setScore }) => {
         break;
       case "bottom":
         newSnake.unshift({ x: (snake[0].x + 1) % height, y: snake[0].y });
+      default:
+        break;
     }
     if (snake[0].x === food.x && snake[0].y === food.y) {
       setFood(randomPosition);

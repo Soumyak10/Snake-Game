@@ -1,5 +1,4 @@
 import HowToPlay from "./HowToPlay";
-import { useState } from "react";
 import "./header.css";
 import Music from "./Music";
 import { GiSnake } from "react-icons/gi";
