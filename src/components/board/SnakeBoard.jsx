@@ -126,8 +126,8 @@ const SnakeBoard = ({ score, setScore }) => {
   }
 
   return (
-    <div className="board" onClick={() => setIsPlaying(!isPlaying)}>
-      <div className="blur_board"> PRESS SPACE TO PLAY</div>
+    <div className="board">
+      {/* <div className={` ${isPlaying ? "" : "blur_board"}`}></div> */}
       {board.map((row, row_index) => (
         <div key={row_index} className="row">
           {row.map((cell, cell_index) => (
